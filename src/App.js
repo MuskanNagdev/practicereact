@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
-
+import Pagetwo from "./components/Pagetwo";
+import Pageone from "./components/Pageone";
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import Navbar from "./components/Navbar";
+import NestedCom from "./components/NestedCom";
+import Users from "./components/Users";
+import UserDetail from "./components/UserDetail";
+import Admin from "./components/Admin";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <Router>
+      <Navbar/>
+      <Routes>
+        <Route path="/" element={<Pageone/>}></Route>
+        <Route path="pagetwo" element={<Pagetwo/>}>
+          <Route path="nestedcom" element={<NestedCom/>}></Route>
+        </Route>
+        {/* <Route path="navbar" element={<Navbar/>}></Route> */}
+        <Route path="users" element={<Users/>}>
+          <Route path=":userId" element={<UserDetail/>}></Route>
+          <Route path="admin" element={<Admin/>}></Route>
+       </Route>
+      </Routes>
+     </Router>
     </div>
   );
 }
